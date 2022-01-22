@@ -1,6 +1,6 @@
 class SheetsController < ApplicationController
 
-  before_action :authorize, only: [:create]
+  before_action :authorize, only: [:create, :destroy]
 
   def create  
     service = Google::Apis::SheetsV4::SheetsService.new
@@ -20,7 +20,10 @@ class SheetsController < ApplicationController
   end
 
   
-  
+  def destroy
+    sheets = Sheet.find(params[:sheet_id])
+    sheets.destroy
+  end
   
   
   
